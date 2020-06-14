@@ -8,4 +8,6 @@ using Unitility;
 public class TCT_LogicManagerEditor : EditorCustom<TCT_LogicManager>
 {
    
+
+
 }
