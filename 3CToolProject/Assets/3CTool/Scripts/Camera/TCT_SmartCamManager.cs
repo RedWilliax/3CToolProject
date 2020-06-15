@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unitility;
+using System.Linq;
 
-public class TCT_SmartCamManager : MonoBehaviour, IHandler<TCT_SmartCam>
+public class TCT_SmartCamManager : Singleton<TCT_SmartCamManager>, IHandler<TCT_SmartCam>
 {
     Dictionary<int, TCT_SmartCam> allHandle = new Dictionary<int, TCT_SmartCam>();
 
@@ -13,25 +14,24 @@ public class TCT_SmartCamManager : MonoBehaviour, IHandler<TCT_SmartCam>
     {
         ManageHandle(true, _handle);
     }
+    public void RemoveHandle(TCT_SmartCam _handle)
+    {
+        ManageHandle(false, _handle);
+    }
 
     public bool ExistHandle(TCT_SmartCam _handle)
     {
-        throw new System.NotImplementedException();
+        return allHandle.Any(n => n.Value.ID == _handle.ID);
     }
 
     public void ManageHandle(bool _add, TCT_SmartCam _handle)
     {
         bool _exist = ExistHandle(_handle);
 
-        if (_add ? !_exist : _exist) return;
+        if (_add ? _exist : !_exist) return;
 
-
-
-
+        if (_add) allHandle.Add(_handle.ID, _handle);
+        else allHandle.Remove(_handle.ID);
     }
 
-    public void RemoveHandle(TCT_SmartCam _handle)
-    {
-        ManageHandle(false, _handle);
-    }
 }

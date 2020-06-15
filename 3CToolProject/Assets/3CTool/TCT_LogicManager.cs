@@ -6,6 +6,6 @@ using Unitility;
 public class TCT_LogicManager : Singleton<TCT_LogicManager>
 {
 
-
+    
 
 }
