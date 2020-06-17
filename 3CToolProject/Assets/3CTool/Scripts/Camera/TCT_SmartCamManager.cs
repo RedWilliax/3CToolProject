@@ -14,6 +14,7 @@ public class TCT_SmartCamManager : Singleton<TCT_SmartCamManager>, IHandler<TCT_
     {
         ManageHandle(true, _handle);
     }
+
     public void RemoveHandle(TCT_SmartCam _handle)
     {
         ManageHandle(false, _handle);
