@@ -7,15 +7,23 @@ using Unitility;
 [CustomEditor(typeof(TCT_SmartCam))]
 public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 {
-    // Start is called before the first frame update
-    void Start()
+    bool _fixeCame = false;
+
+    protected override void OnEnable()
     {
-        
+        base.OnEnable();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnInspectorGUI()
     {
-        
+
+        _fixeCame = GUILayout.Toggle(_fixeCame, "Fixe Came");
+
+
+
+
     }
+
+
+
 }

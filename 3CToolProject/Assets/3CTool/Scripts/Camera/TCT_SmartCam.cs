@@ -9,6 +9,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     new string name = "Default_SmartCam";
 
+    SmartCamOption smartCamOption = new SmartCamOption();
+
     public int ID { get => id; set => id = value; }
 
     public string Name { get => name; set => name = value; }
@@ -39,4 +41,37 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
         TCT_SmartCamManager.Instance.RemoveHandle(this);
     }
+}
+
+
+public class SmartCamOption
+{
+    float x = 0;
+
+    float y = 0;
+
+    float z = 0;
+
+    float lerp = 0;
+
+    bool fixeCam = false;
+
+    public float X
+    {
+        get => x;
+
+        set
+        {
+
+
+
+        }
+    }
+
+
+
+
+
+
+
 }
