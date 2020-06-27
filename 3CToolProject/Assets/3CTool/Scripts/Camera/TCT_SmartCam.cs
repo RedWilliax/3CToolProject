@@ -62,12 +62,29 @@ public class SmartCamOption
 
         set
         {
-
-
-
+            x = fixeCam ? x : value;
         }
     }
 
+    public float Y
+    {
+        get => y;
+
+        set
+        {
+            y = fixeCam ? y : value;
+        }
+    }
+
+    public float Z
+    {
+        get => z;
+
+        set
+        {
+            z = fixeCam ? z : value;
+        }
+    }
 
 
 
