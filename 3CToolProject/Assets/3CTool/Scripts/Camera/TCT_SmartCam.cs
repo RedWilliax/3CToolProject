@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unitility;
 
+enum TypeSmartCam
+{
+    FPS,
+    TPS,
+    FIXE,
+    NONE
+
+}
+
 public class TCT_SmartCam : MonoBehaviour, IHandle
 {
     int id = 0;
@@ -20,6 +29,11 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
         StartCoroutine(AddToHandler());
     }
 
+    private void Start()
+    {
+        StartCoroutine(InitSmartCam());
+    }
+
     private void OnDestroy()
     {
         RemoveToHandler();
@@ -34,13 +48,23 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
         TCT_SmartCamManager.Instance.AddHandle(this);
     }
-
     public void RemoveToHandler()
     {
         if (!TCT_SmartCamManager.Instance) return;
 
         TCT_SmartCamManager.Instance.RemoveHandle(this);
     }
+
+    IEnumerator InitSmartCam()
+    {
+        while ((bool)!TCT_SmartCamManager.Instance?.ExistHandle(this))
+            yield return null;
+
+
+
+    }
+
+
 }
 
 

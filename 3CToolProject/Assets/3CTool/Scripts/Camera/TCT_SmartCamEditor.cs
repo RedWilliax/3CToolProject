@@ -23,7 +23,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         _fixeCam = Reflection.Field<bool>(smartCamOption, "fixeCam");
 
         _x = Reflection.Property<float>(smartCamOption, "X");
-
+        
 
     }
 

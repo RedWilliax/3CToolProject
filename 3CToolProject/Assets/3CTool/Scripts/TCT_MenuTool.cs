@@ -5,9 +5,17 @@ using UnityEditor;
 
 public class TCT_MenuTool : MonoBehaviour
 {
+
+    const string logicName = "Logic [3CTool]";
+
     [MenuItem("3CTool/SmartCamera/Add SmartCam")]
     static void AddSmartCam()
     {
+        VerifyLogic();
+
+        if (!TCT_SmartCamManager.Instance)
+            AddSmartCamManager();
+
         GameObject _go = new GameObject($"SmartCam", (typeof(TCT_SmartCam)));
 
         Selection.activeObject = _go;
@@ -24,6 +32,39 @@ public class TCT_MenuTool : MonoBehaviour
     static void AddInputManager()
     {
 
+
+    }
+
+    static void VerifyLogic()
+    {
+        if (Exist(logicName)) return;
+
+        Debug.Log("Add Logic because it's not exist");
+
+        AddLogic();
+
+    }
+
+    static bool Exist(string _objectToCheck)
+    {
+        GameObject _ob = GameObject.Find(_objectToCheck);
+
+        return _ob != null;
+    }
+
+    static void AddSmartCamManager()
+    {
+        GetLogic().AddComponent<TCT_SmartCamManager>();
+    }
+
+    static GameObject GetLogic()
+    {
+        return GameObject.Find(logicName);
+    }
+
+    static void AddLogic()
+    {
+        new GameObject(logicName);
 
     }
 
