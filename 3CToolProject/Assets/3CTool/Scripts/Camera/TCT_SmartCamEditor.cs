@@ -17,28 +17,34 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         smartCamOption = Reflection.Field<SmartCamOption>(eTarget, "smartCamOption");
     }
 
-    void SetRelflection(out bool _fixeCam)
+    void SetRelflection(out bool _fixeCam, out float _x)
     {
 
         _fixeCam = Reflection.Field<bool>(smartCamOption, "fixeCam");
 
+        _x = Reflection.Property<float>(smartCamOption, "X");
+
 
     }
 
-    void UpdateReflection(ref bool _fixeCam)
+    void UpdateReflection(ref bool _fixeCam, ref float _x)
     {
         Reflection.SetField(smartCamOption, "fixeCam", _fixeCam);
+
+        Reflection.SetProperty(smartCamOption, "X", _x);
 
     }
 
     public override void OnInspectorGUI()
     {
 
-        SetRelflection(out bool _fixeCam);
+        SetRelflection(out bool _fixeCam, out float _x);
 
         _fixeCam = EditorGUILayout.Toggle("FixeCam", _fixeCam);
 
-        UpdateReflection(ref _fixeCam);
+        _x = EditorGUILayout.Slider("X", _x, -100, 100);
+
+        UpdateReflection(ref _fixeCam, ref _x);
 
     }
 
