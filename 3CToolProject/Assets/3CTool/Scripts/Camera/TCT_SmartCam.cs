@@ -20,9 +20,15 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     SmartCamOption smartCamOption = new SmartCamOption();
 
+    TCT_SmartCamBehaviour behaviour = null;
+
+    TypeSmartCam typeSamrtCam = TypeSmartCam.NONE;
+
     public int ID { get => id; set => id = value; }
 
     public string Name { get => name; set => name = value; }
+
+    public TCT_SmartCamBehaviour Behaviour { get => behaviour; set => behaviour = value; }
 
     private void Awake()
     {
@@ -60,6 +66,25 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
         while ((bool)!TCT_SmartCamManager.Instance?.ExistHandle(this))
             yield return null;
 
+        Debug.Log("Salut");
+
+    }
+
+    void InitBehaviour()
+    {
+        switch (typeSamrtCam)
+        {
+            case TypeSmartCam.FPS:
+                break;
+            case TypeSmartCam.TPS:
+                break;
+            case TypeSmartCam.FIXE:
+                break;
+            case TypeSmartCam.NONE:
+                break;
+            default:
+                break;
+        }
 
 
     }
@@ -75,8 +100,6 @@ public class SmartCamOption
     float y = 0;
 
     float z = 0;
-
-    float lerp = 0;
 
     bool fixeCam = false;
 
