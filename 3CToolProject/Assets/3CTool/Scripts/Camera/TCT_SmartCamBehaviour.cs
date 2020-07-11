@@ -4,25 +4,19 @@ using UnityEngine;
 
 abstract public class TCT_SmartCamBehaviour : MonoBehaviour
 {
-   
-    public virtual void FollowTarget()
-    {
 
+    public abstract void FollowTarget();
 
-    }
-
-    public virtual void RotateSmartCam()
-    {
-
-    }
+    public abstract void RotateSmartCam();
 }
 
 public class TCT_SmartCamBehaviourOption
 {
+    Transform target = null;
+
     float lerp = 0;
 
-    
-
+    public Transform Target { get; set; }
 
 
 }

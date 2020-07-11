@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Unitility;
 
@@ -18,7 +19,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     new string name = "Default_SmartCam";
 
-    SmartCamOption smartCamOption = new SmartCamOption();
+    SmartCamOption smartCamOption = null;
 
     TCT_SmartCamBehaviour behaviour = null;
 
@@ -30,6 +31,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     public TCT_SmartCamBehaviour Behaviour { get => behaviour; set => behaviour = value; }
 
+    public SmartCamOption SmartCamOption { get => smartCamOption; set => smartCamOption = value; }
+
     private void Awake()
     {
         StartCoroutine(AddToHandler());
@@ -38,6 +41,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
     private void Start()
     {
         StartCoroutine(InitSmartCam());
+
     }
 
     private void OnDestroy()
@@ -65,9 +69,6 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
     {
         while ((bool)!TCT_SmartCamManager.Instance?.ExistHandle(this))
             yield return null;
-
-        Debug.Log("Salut");
-
     }
 
     void InitBehaviour()
@@ -85,14 +86,12 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
             default:
                 break;
         }
-
-
     }
 
 
 }
 
-
+[Serializable]
 public class SmartCamOption
 {
     float x = 0;
@@ -133,6 +132,16 @@ public class SmartCamOption
         }
     }
 
+    public bool FixeCam
+    {
+        get => fixeCam;
+
+        set
+        {
+            if (value == fixeCam) return;
+            fixeCam = value;
+        }
+    }
 
 
 
