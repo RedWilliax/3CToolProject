@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Unitility;
 using ReflectionLib;
+using Unitility;
 
 [CustomEditor(typeof(TCT_SmartCam))]
 public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
@@ -26,18 +26,14 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void UpdateReflection(ref SmartCamOption _smartCamOption)
     {
-        //Reflection.SetField(eTarget, "smartCamOption", _smartCamOption);
-
         eTarget.SmartCamOption = _smartCamOption;
     }
 
     public override void OnInspectorGUI()
     {
-        bool _fixeCam = Reflection.Field<bool>(smartCamOption, "fixeCam");
+       //(smartCamOption, "fixeCam", "FixeCam");
 
-        _fixeCam = EditorGUILayout.Toggle("FixeCam", _fixeCam);
-
-        Reflection.SetField(smartCamOption, "fixeCam", _fixeCam);
+        
 
         //_x = EditorGUILayout.Slider("X", _x, -100, 100);
         //_y = EditorGUILayout.Slider("Y", _y, -100, 100);

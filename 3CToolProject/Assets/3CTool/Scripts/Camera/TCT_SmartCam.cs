@@ -19,7 +19,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     new string name = "Default_SmartCam";
 
-    SmartCamOption smartCamOption = null;
+    [SerializeField] SmartCamOption smartCamOption = null;
 
     TCT_SmartCamBehaviour behaviour = null;
 
@@ -100,7 +100,7 @@ public class SmartCamOption
 
     float z = 0;
 
-    bool fixeCam = false;
+    [SerializeField] bool fixeCam = false;
 
     public float X
     {
