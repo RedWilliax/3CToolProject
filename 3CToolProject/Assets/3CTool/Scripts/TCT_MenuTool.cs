@@ -13,7 +13,7 @@ public class TCT_MenuTool : MonoBehaviour
     {
         VerifyLogic();
 
-        if (!TCT_SmartCamManager.Instance)
+        if (!GetLogic().GetComponent<TCT_SmartCamManager>())
             AddSmartCamManager();
 
         GameObject _go = new GameObject($"SmartCam", (typeof(TCT_SmartCam)));

@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &353475903
+--- !u!1 &376613358
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,8 +129,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 353475905}
-  - component: {fileID: 353475904}
+  - component: {fileID: 376613360}
+  - component: {fileID: 376613359}
   m_Layer: 0
   m_Name: '[TCT_SmartCam]'
   m_TagString: Untagged
@@ -138,25 +138,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &353475904
+--- !u!114 &376613359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353475903}
+  m_GameObject: {fileID: 376613358}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e4e5ea60f51ee7499df3c5ba5e4e839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &353475905
+  smartCamOption:
+    fixeCam: 1
+--- !u!4 &376613360
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353475903}
+  m_GameObject: {fileID: 376613358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -174,7 +176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 611679448}
   - component: {fileID: 611679447}
-  - component: {fileID: 611679449}
   m_Layer: 0
   m_Name: Logic [3CTool]
   m_TagString: Untagged
@@ -208,18 +209,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611679449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611679446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e99fe6909c479214e86f2e7c68c63ddc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

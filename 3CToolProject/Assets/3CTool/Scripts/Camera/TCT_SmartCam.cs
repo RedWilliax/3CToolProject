@@ -94,11 +94,11 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 [Serializable]
 public class SmartCamOption
 {
-    float x = 0;
+    [SerializeField] float x = 0;
 
-    float y = 0;
+    [SerializeField] float y = 0;
 
-    float z = 0;
+    [SerializeField] float z = 0;
 
     [SerializeField] bool fixeCam = false;
 
