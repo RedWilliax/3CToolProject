@@ -31,13 +31,21 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     public override void OnInspectorGUI()
     {
-
+        UtilityEditor.VersioningTool("TCT", 0, 1, 0, 0);
+        
+        EditorGUILayout.Space();
 
         EditorReflectionLayout.Toggle(smartCamOption, "fixeCam", "FixeCam");
 
-        EditorReflectionLayout.Slider(smartCamOption, "x", "X", -100, 100);
-        EditorReflectionLayout.Slider(smartCamOption, "y", "Y", -100, 100);
-        EditorReflectionLayout.Slider(smartCamOption, "z", "Z", -100, 100);
+        EditorGUILayout.Space();
+
+        EditorReflectionLayout.Slider(smartCamOption, "x", "X", -100f, 100f);
+        EditorReflectionLayout.Slider(smartCamOption, "y", "Y", -100f, 100f);
+        EditorReflectionLayout.Slider(smartCamOption, "z", "Z", -100f, 100f);
+
+        EditorGUILayout.Space();
+
+        EditorReflectionLayout.EnumPopup<TypeSmartCam>(eTarget, "typeSmartCam", "TYPE SMART CAM");
 
         UpdateReflection(ref smartCamOption);
 

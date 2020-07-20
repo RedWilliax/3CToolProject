@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using Unitility;
 
-enum TypeSmartCam
+public enum TypeSmartCam
 {
     FPS,
     TPS,
@@ -23,7 +23,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     TCT_SmartCamBehaviour behaviour = null;
 
-    [SerializeField] TypeSmartCam typeSamrtCam = TypeSmartCam.NONE;
+    [SerializeField] TypeSmartCam typeSmartCam = TypeSmartCam.NONE;
 
     public int ID { get => id; set => id = value; }
 
@@ -41,7 +41,6 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
     private void Start()
     {
         StartCoroutine(InitSmartCam());
-
     }
 
     private void OnDestroy()
@@ -71,12 +70,11 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
             yield return null;
 
         InitBehaviour();
-
     }
 
     void InitBehaviour()
     {
-        switch (typeSamrtCam)
+        switch (typeSmartCam)
         {
             case TypeSmartCam.FPS:
                 break;
@@ -145,9 +143,5 @@ public class SmartCamOption
             fixeCam = value;
         }
     }
-
-
-
-
 
 }
