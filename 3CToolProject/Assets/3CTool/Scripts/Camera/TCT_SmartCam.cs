@@ -23,7 +23,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     TCT_SmartCamBehaviour behaviour = null;
 
-    TypeSmartCam typeSamrtCam = TypeSmartCam.NONE;
+    [SerializeField] TypeSmartCam typeSamrtCam = TypeSmartCam.NONE;
 
     public int ID { get => id; set => id = value; }
 
@@ -69,6 +69,9 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
     {
         while ((bool)!TCT_SmartCamManager.Instance?.ExistHandle(this))
             yield return null;
+
+        InitBehaviour();
+
     }
 
     void InitBehaviour()
