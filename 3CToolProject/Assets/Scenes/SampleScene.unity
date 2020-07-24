@@ -151,7 +151,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smartCamOption:
+    x: 0
+    y: 0
+    z: 0
     fixeCam: 1
+    lerp: 0
+    character: {fileID: 0}
+  behaviour: {fileID: 0}
+  typeSmartCam: 0
 --- !u!4 &376613360
 Transform:
   m_ObjectHideFlags: 0

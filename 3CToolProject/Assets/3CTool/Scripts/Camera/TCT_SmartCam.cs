@@ -19,9 +19,9 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     new string name = "Default_SmartCam";
 
-    [SerializeField] SmartCamOption smartCamOption = null;
+    [SerializeField] SmartCamOption smartCamOption = new SmartCamOption();
 
-    TCT_SmartCamBehaviour behaviour = null;
+    [SerializeField] TCT_SmartCamBehaviour behaviour = null;
 
     [SerializeField] TypeSmartCam typeSmartCam = TypeSmartCam.NONE;
 
@@ -77,6 +77,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
         switch (typeSmartCam)
         {
             case TypeSmartCam.FPS:
+                behaviour = gameObject.AddComponent<TCT_SmartCamFPS>();
+                behaviour.Init(this);
                 break;
             case TypeSmartCam.TPS:
                 break;
@@ -102,6 +104,10 @@ public class SmartCamOption
     [SerializeField] float z = 0;
 
     [SerializeField] bool fixeCam = false;
+
+    [SerializeField] float lerp = 0;
+
+    [SerializeField] TCT_Character character = null;
 
     public float X
     {
@@ -143,5 +149,27 @@ public class SmartCamOption
             fixeCam = value;
         }
     }
+
+    public TCT_Character Character
+    {
+        get => character;
+
+        set
+        {
+            character = value;
+        }
+    }
+
+    public float Lerp
+    {
+        get => lerp;
+
+        set
+        {
+            lerp = value > 1 ? lerp : value;
+        }
+    }
+
+    public Vector3 OffsetSmartCam => new Vector3(x, y, z);
 
 }

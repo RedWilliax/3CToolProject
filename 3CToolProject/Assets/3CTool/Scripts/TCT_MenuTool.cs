@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class TCT_MenuTool : MonoBehaviour
+public static class TCT_MenuTool
 {
-
     const string logicName = "Logic [3CTool]";
 
     [MenuItem("3CTool/SmartCamera/Add SmartCam")]
@@ -14,7 +13,7 @@ public class TCT_MenuTool : MonoBehaviour
         VerifyLogic();
 
         if (!GetLogic().GetComponent<TCT_SmartCamManager>())
-            AddSmartCamManager();
+            AddComponentOnLogic<TCT_SmartCamManager>();
 
         GameObject _go = new GameObject($"SmartCam", (typeof(TCT_SmartCam)));
 
@@ -35,16 +34,6 @@ public class TCT_MenuTool : MonoBehaviour
 
     }
 
-    static void VerifyLogic()
-    {
-        if (Exist(logicName)) return;
-
-        Debug.Log("Add Logic because it's not exist");
-
-        AddLogic();
-
-    }
-
     static bool Exist(string _objectToCheck)
     {
         GameObject _ob = GameObject.Find(_objectToCheck);
@@ -52,9 +41,19 @@ public class TCT_MenuTool : MonoBehaviour
         return _ob != null;
     }
 
-    static void AddSmartCamManager()
+    #region ManagerLogic
+    static void VerifyLogic()
     {
-        GetLogic().AddComponent<TCT_SmartCamManager>();
+        if (Exist(logicName)) return;
+
+        Debug.Log("Add Logic because it's not exist");
+
+        AddLogic();
+    }
+
+    static void AddComponentOnLogic<T>() where T : MonoBehaviour
+    {
+        GetLogic().AddComponent<T>();
     }
 
     static GameObject GetLogic()
@@ -67,5 +66,8 @@ public class TCT_MenuTool : MonoBehaviour
         new GameObject(logicName);
 
     }
+
+    #endregion
+
 
 }
