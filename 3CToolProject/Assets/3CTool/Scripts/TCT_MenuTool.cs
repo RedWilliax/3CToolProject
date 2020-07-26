@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -68,6 +69,9 @@ public static class TCT_MenuTool
     }
 
     #endregion
+
+    public static List<TCT_Character> GetAllCharacters() => GameObject.FindObjectsOfType<TCT_Character>().ToList();
+    
 
 
 }

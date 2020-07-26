@@ -107,7 +107,7 @@ public class SmartCamOption
 
     [SerializeField] float lerp = 0;
 
-    [SerializeField] TCT_Character character = null;
+    [SerializeField] TCT_Character target = null;
 
     public float X
     {
@@ -150,13 +150,13 @@ public class SmartCamOption
         }
     }
 
-    public TCT_Character Character
+    public TCT_Character Target
     {
-        get => character;
+        get => target;
 
         set
         {
-            character = value;
+            target = value;
         }
     }
 
