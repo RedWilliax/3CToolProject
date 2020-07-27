@@ -54,6 +54,12 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         
         EditorLayout.Space(2);
 
+        EditorReflectionLayout.EnumPopup<TypeSmartCam>(eTarget, "typeSmartCam", "TYPE SMART CAM");
+
+        if (Reflection.Field<TypeSmartCam>(eTarget, "typeSmartCam") == TypeSmartCam.NONE) return;
+
+        EditorLayout.Space();
+
         SetTargetSmartCam();
 
         EditorLayout.Space();
@@ -64,29 +70,15 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         SetOffSetSmartCam();
 
-        EditorLayout.Space(2);
-
-        EditorReflectionLayout.EnumPopup<TypeSmartCam>(eTarget, "typeSmartCam", "TYPE SMART CAM");
-
         EditorLayout.Space();
 
-        switch (Reflection.Field<TypeSmartCam>(eTarget, "typeSmartCam"))
-        {
-            case TypeSmartCam.FPS:
-            case TypeSmartCam.TPS:
-                EditorReflectionLayout.Slider(smartCamOption, "lerp", "Lerp", 0f, 1f);
-                break;
+        EditorReflectionLayout.Slider(smartCamOption, "lerp", "Lerp", 0f, 1f);
 
-            case TypeSmartCam.FIXE:
-            case TypeSmartCam.NONE:
-
-                break;
-        }
-
-        
-
+        EditorLayout.Space(2);
 
         UpdateReflection(ref smartCamOption);
+
+        SceneView.RepaintAll();
 
     }
 
@@ -103,12 +95,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Name).ToArray());
 
-        TCT_Character _currentTarget = Reflection.Field<TCT_Character>(smartCamOption, "target");
-
-        _currentTarget = allCharacter[currentIDTarget];
-
-        Reflection.SetField(smartCamOption, "target", _currentTarget);
+        Reflection.SetField(smartCamOption, "target", allCharacter[currentIDTarget]);
     }
-
 
 }

@@ -8,7 +8,6 @@ public enum TypeSmartCam
 {
     FPS,
     TPS,
-    FIXE,
     NONE
 
 }
@@ -82,13 +81,24 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
                 break;
             case TypeSmartCam.TPS:
                 break;
-            case TypeSmartCam.FIXE:
-                break;
+
             case TypeSmartCam.NONE:
                 break;
             default:
                 break;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawSphere(smartCamOption.Target.transform.position + Vector3.up * 2, 1);
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawSphere(transform.position, 1);
     }
 
 

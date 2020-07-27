@@ -14,11 +14,17 @@ public abstract class TCT_SmartCamBehaviour : MonoBehaviour
         ownSmartCam = _ownSmartCam;
 
         ownOption = _ownSmartCam.SmartCamOption;
-
     }
 
-    public abstract void FollowTarget();
+    protected virtual void FollowTarget()
+    {
+        float _x = (1 - ownOption.Lerp) * ownOption.Target.transform.position.x + ownOption.Lerp * transform.position.x;
+        float _y = (1 - ownOption.Lerp) * ownOption.Target.transform.position.y + ownOption.Lerp * transform.position.y;
+        float _z = (1 - ownOption.Lerp) * ownOption.Target.transform.position.z + ownOption.Lerp * transform.position.z;
 
-    public abstract void RotateSmartCam();
+        transform.position = new Vector3(_x, _y, _z) + ownOption.OffsetSmartCam;
+    }
+
+    protected virtual void RotateSmartCam() {}
 }
 

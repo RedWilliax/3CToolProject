@@ -17,4 +17,15 @@ public class TCT_Character : MonoBehaviour
     {
         
     }
+
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawSphere(transform.position, 1);
+
+
+    }
+
 }
