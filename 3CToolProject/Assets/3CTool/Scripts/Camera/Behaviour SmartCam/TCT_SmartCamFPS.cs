@@ -13,13 +13,11 @@ public class TCT_SmartCamFPS : TCT_SmartCamBehaviour
 
     }
 
-
     protected override void RotateSmartCam()
     {
         base.RotateSmartCam();
 
         transform.rotation = ownOption.Target.transform.rotation;
-
     }
 
 

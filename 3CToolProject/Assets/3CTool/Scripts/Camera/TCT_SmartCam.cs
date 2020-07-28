@@ -16,7 +16,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 {
     int id = 0;
 
-    new string name = "Default_SmartCam";
+    [SerializeField] new string name = "Default_SmartCam";
 
     [SerializeField] SmartCamOption smartCamOption = new SmartCamOption();
 
@@ -181,5 +181,9 @@ public class SmartCamOption
     }
 
     public Vector3 OffsetSmartCam => new Vector3(x, y, z);
+
+    public void SetTarget(TCT_Character _target) => Target = target;
+
+
 
 }

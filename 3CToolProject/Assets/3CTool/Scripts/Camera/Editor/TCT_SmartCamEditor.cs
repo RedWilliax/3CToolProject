@@ -54,6 +54,10 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         
         EditorLayout.Space(2);
 
+        EditorReflectionLayout.TextField(eTarget, "name", "SmartCam's Name");
+
+        EditorLayout.Space();
+
         EditorReflectionLayout.EnumPopup<TypeSmartCam>(eTarget, "typeSmartCam", "TYPE SMART CAM");
 
         if (Reflection.Field<TypeSmartCam>(eTarget, "typeSmartCam") == TypeSmartCam.NONE) return;
