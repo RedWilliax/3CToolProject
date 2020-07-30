@@ -94,7 +94,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
         Gizmos.color = Color.green;
 
-        Gizmos.DrawSphere(smartCamOption.Target.transform.position + Vector3.up * 2, 1);
+        if (smartCamOption.Target != null)
+            Gizmos.DrawSphere(smartCamOption.Target.transform.position + Vector3.up * 2, 1);
 
         Gizmos.color = Color.red;
 

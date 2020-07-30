@@ -95,7 +95,11 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void SetTargetSmartCam()
     {
-        if (allCharacter.Count < 1) return;
+        if (allCharacter.Count < 1) 
+        {
+            EditorGUILayout.LabelField("No target found");
+            return;
+        }
 
         currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Name).ToArray());
 

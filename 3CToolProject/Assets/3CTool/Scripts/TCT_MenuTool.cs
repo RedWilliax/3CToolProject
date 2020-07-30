@@ -24,8 +24,16 @@ public static class TCT_MenuTool
     [MenuItem("3CTool/Player/Add Player")]
     static void AddPlayer()
     {
+        VerifyLogic();
 
+        if (!GetLogic().GetComponent<TCT_CharacterManager>())
+            AddComponentOnLogic<TCT_CharacterManager>();
 
+        GameObject _go = new GameObject($"Character [{GetAllCharacters().Count}]", typeof(TCT_Character));
+
+        _go.GetComponent<TCT_Character>().Name = _go.name;
+
+        Selection.activeObject = _go;
     }
 
     [MenuItem("3CTool/Input/Add InputManager")]
