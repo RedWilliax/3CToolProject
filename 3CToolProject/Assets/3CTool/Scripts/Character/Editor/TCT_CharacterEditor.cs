@@ -9,6 +9,8 @@ using Unitility;
 public class TCT_CharacterEditor : EditorCustom<TCT_Character>
 {
 
+    TCT_CharacterComponent currentComponent;
+
     protected override void OnEnable()
     {
         eTarget = (TCT_Character)target;
@@ -25,6 +27,14 @@ public class TCT_CharacterEditor : EditorCustom<TCT_Character>
         EditorReflectionLayout.TextField(eTarget, "name", "Character Name");
 
         EditorLayout.Space();
+
+        currentComponent = (TCT_CharacterComponent)EditorGUILayout.ObjectField("Component to Add", currentComponent, typeof(TCT_CharacterComponent), false);
+
+        if(GUILayout.Button("Add"))
+        {
+            eTarget.AddComponent(currentComponent);
+        }
+
     }
 
 }

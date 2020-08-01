@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Unitility;
 
@@ -7,9 +8,11 @@ public class TCT_Character : MonoBehaviour, IHandle
 {
     [SerializeField] new string name = "DefaultName";
 
-    public string Name { get => name; set => name = value; }
-
     int id = 0;
+
+    [SerializeField] List<TCT_CharacterComponent> allComponents = new List<TCT_CharacterComponent>();
+
+    public string Name { get => name; set => name = value; }
 
     public int ID { get => id; set => id = value; }
 
@@ -48,4 +51,13 @@ public class TCT_Character : MonoBehaviour, IHandle
 
         TCT_CharacterManager.Instance.RemoveHandle(this);
     }
+
+    public void AddComponent(TCT_CharacterComponent _component)
+    {
+        if (allComponents.Any(n => n.GetType() == _component.GetType()))
+            Debug.Log($"sameType {_component.GetType()}");
+
+
+    }
+
 }
