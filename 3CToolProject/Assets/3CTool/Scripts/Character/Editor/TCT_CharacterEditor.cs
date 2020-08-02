@@ -30,10 +30,9 @@ public class TCT_CharacterEditor : EditorCustom<TCT_Character>
 
         currentComponent = (TCT_CharacterComponent)EditorGUILayout.ObjectField("Component to Add", currentComponent, typeof(TCT_CharacterComponent), false);
 
-        if(GUILayout.Button("Add"))
-        {
-            eTarget.AddComponent(currentComponent);
-        }
+        EditorLayout.Button("Add", eTarget.AddComponent, currentComponent);
+            
+        
 
     }
 
