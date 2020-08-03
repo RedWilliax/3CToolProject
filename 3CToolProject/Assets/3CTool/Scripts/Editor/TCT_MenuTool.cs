@@ -36,11 +36,10 @@ public static class TCT_MenuTool
         Selection.activeObject = _go;
     }
 
-    [MenuItem("3CTool/Input/Add InputManager")]
-    static void AddInputManager()
+    [MenuItem("3CTool/Input/InputManager")]
+    static void InputManager()
     {
-
-
+        EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager");
     }
 
     static bool Exist(string _objectToCheck)
@@ -79,7 +78,7 @@ public static class TCT_MenuTool
     #endregion
 
     public static List<ITargetSC> GetAllCharacters() => GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITargetSC>().ToList();
-    
+
 
 
 }

@@ -476,7 +476,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-    fixeCam: 1
+    fixeCam: 0
     lerp: 0
   behaviour: {fileID: 0}
   typeSmartCam: 0
