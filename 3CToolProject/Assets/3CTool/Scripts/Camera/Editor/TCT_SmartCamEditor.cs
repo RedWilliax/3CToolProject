@@ -11,7 +11,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 {
     SmartCamOption smartCamOption;
 
-    List<TCT_Character> allCharacter;
+    List<ITargetSC> allCharacter;
 
     int currentIDTarget = 0;
 
@@ -33,7 +33,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void SetIDTarget()
     {
-        TCT_Character _currentTarget = Reflection.Field<TCT_Character>(smartCamOption, "target");
+        ITargetSC _currentTarget = Reflection.Field<ITargetSC>(smartCamOption, "target");
 
         if (_currentTarget == null || allCharacter.Count < 1)
             return;

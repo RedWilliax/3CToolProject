@@ -78,7 +78,7 @@ public static class TCT_MenuTool
 
     #endregion
 
-    public static List<TCT_Character> GetAllCharacters() => GameObject.FindObjectsOfType<TCT_Character>().ToList();
+    public static List<ITargetSC> GetAllCharacters() => GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITargetSC>().ToList();
     
 
 

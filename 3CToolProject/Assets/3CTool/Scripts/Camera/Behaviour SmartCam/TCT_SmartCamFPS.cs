@@ -17,7 +17,7 @@ public class TCT_SmartCamFPS : TCT_SmartCamBehaviour
     {
         base.RotateSmartCam();
 
-        transform.rotation = ownOption.Target.transform.rotation;
+        transform.rotation = ownOption.Target.Transform.rotation;
     }
 
 

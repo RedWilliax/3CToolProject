@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Unitility;
 
-public class TCT_Character : MonoBehaviour, IHandle
+public class TCT_Character : MonoBehaviour, IHandle, ITargetSC
 {
     [SerializeField] new string name = "DefaultName";
 
@@ -15,6 +15,8 @@ public class TCT_Character : MonoBehaviour, IHandle
     public string Name { get => name; set => name = value; }
 
     public int ID { get => id; set => id = value; }
+
+    public Transform Transform => transform;
 
     // Start is called before the first frame update
     void Start()

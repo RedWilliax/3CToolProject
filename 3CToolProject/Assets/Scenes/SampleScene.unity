@@ -478,7 +478,6 @@ MonoBehaviour:
     z: 0
     fixeCam: 1
     lerp: 0
-    target: {fileID: 1750458942}
   behaviour: {fileID: 0}
   typeSmartCam: 0
 --- !u!4 &1964723515

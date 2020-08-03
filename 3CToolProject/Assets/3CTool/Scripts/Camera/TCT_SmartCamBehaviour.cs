@@ -18,9 +18,9 @@ public abstract class TCT_SmartCamBehaviour : MonoBehaviour
 
     protected virtual void FollowTarget()
     {
-        float _x = (1 - ownOption.Lerp) * ownOption.Target.transform.position.x + ownOption.Lerp * transform.position.x;
-        float _y = (1 - ownOption.Lerp) * ownOption.Target.transform.position.y + ownOption.Lerp * transform.position.y;
-        float _z = (1 - ownOption.Lerp) * ownOption.Target.transform.position.z + ownOption.Lerp * transform.position.z;
+        float _x = (1 - ownOption.Lerp) * ownOption.Target.Transform.position.x + ownOption.Lerp * transform.position.x;
+        float _y = (1 - ownOption.Lerp) * ownOption.Target.Transform.position.y + ownOption.Lerp * transform.position.y;
+        float _z = (1 - ownOption.Lerp) * ownOption.Target.Transform.position.z + ownOption.Lerp * transform.position.z;
 
         transform.position = new Vector3(_x, _y, _z) + ownOption.OffsetSmartCam;
     }

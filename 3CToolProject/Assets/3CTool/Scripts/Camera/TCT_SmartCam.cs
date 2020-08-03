@@ -95,7 +95,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
         Gizmos.color = Color.green;
 
         if (smartCamOption.Target != null)
-            Gizmos.DrawSphere(smartCamOption.Target.transform.position + Vector3.up * 2, 1);
+            Gizmos.DrawSphere(smartCamOption.Target.Transform.position + Vector3.up * 2, 1);
 
         Gizmos.color = Color.red;
 
@@ -118,7 +118,7 @@ public class SmartCamOption
 
     [SerializeField] float lerp = 0;
 
-    [SerializeField] TCT_Character target = null;
+    [SerializeField] ITargetSC target = null;
 
     public float X
     {
@@ -161,7 +161,7 @@ public class SmartCamOption
         }
     }
 
-    public TCT_Character Target
+    public ITargetSC Target
     {
         get => target;
 
@@ -183,7 +183,7 @@ public class SmartCamOption
 
     public Vector3 OffsetSmartCam => new Vector3(x, y, z);
 
-    public void SetTarget(TCT_Character _target) => Target = target;
+    public void SetTarget(ITargetSC _target) => Target = target;
 
 
 
