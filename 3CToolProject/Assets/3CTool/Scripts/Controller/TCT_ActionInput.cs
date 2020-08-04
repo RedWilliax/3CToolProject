@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+[Serializable]
 public class TCT_ActionInput
 {
     public static Action<bool> ActionInput = null;
@@ -12,9 +13,13 @@ public class TCT_ActionInput
 
     List<KeyCode> allKeyCodes = new List<KeyCode>();
 
+    EditorUtility editorUtility = new EditorUtility();
+
     public string Name { get; set; }
 
-    public List<KeyCode> AllKeyCodes { get; set; }
+    public List<KeyCode> AllKeyCodes { get => allKeyCodes; set => allKeyCodes = value; }
+
+    public bool Show => editorUtility.show;
 
     public void AddKey(KeyCode _key)
     {
@@ -35,11 +40,17 @@ public class TCT_ActionInput
         else allKeyCodes.Remove(_key);
     }
 
-
     public bool ExistKeyCode(KeyCode _key)
     {
         return allKeyCodes.Any(n => n == _key);
     }
 
+
+}
+
+[Serializable]
+public class EditorUtility
+{
+   public bool show = false;
 
 }

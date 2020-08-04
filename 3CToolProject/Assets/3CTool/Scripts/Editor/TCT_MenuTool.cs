@@ -39,7 +39,7 @@ public static class TCT_MenuTool
     [MenuItem("3CTool/Input/InputManager")]
     static void InputManager()
     {
-        EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager");
+        EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager 0.1.0.0", true);
     }
 
     static bool Exist(string _objectToCheck)
