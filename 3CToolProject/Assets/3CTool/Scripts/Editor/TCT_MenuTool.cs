@@ -11,10 +11,7 @@ public static class TCT_MenuTool
     [MenuItem("3CTool/SmartCamera/Add SmartCam")]
     static void AddSmartCam()
     {
-        VerifyLogic();
-
-        if (!GetLogic().GetComponent<TCT_SmartCamManager>())
-            AddComponentOnLogic<TCT_SmartCamManager>();
+        VerifyAndAddOnLogic<TCT_SmartCamManager>();
 
         GameObject _go = new GameObject($"SmartCam", (typeof(TCT_SmartCam)));
 
@@ -24,10 +21,7 @@ public static class TCT_MenuTool
     [MenuItem("3CTool/Player/Add Player")]
     static void AddPlayer()
     {
-        VerifyLogic();
-
-        if (!GetLogic().GetComponent<TCT_CharacterManager>())
-            AddComponentOnLogic<TCT_CharacterManager>();
+        VerifyAndAddOnLogic<TCT_CharacterManager>();
 
         GameObject _go = new GameObject($"Character [{GetAllCharacters().Count}]", typeof(TCT_Character));
 
@@ -39,6 +33,8 @@ public static class TCT_MenuTool
     [MenuItem("3CTool/Input/InputManager")]
     static void InputManager()
     {
+        VerifyAndAddOnLogic<TCT_ControllerManager>();
+
         EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager 0.1.0.0", true);
     }
 
@@ -47,6 +43,14 @@ public static class TCT_MenuTool
         GameObject _ob = GameObject.Find(_objectToCheck);
 
         return _ob != null;
+    }
+
+    static void VerifyAndAddOnLogic<T>() where T : MonoBehaviour
+    {
+        VerifyLogic();
+
+        if (!GetLogic().GetComponent<T>())
+            AddComponentOnLogic<T>();
     }
 
     #region ManagerLogic

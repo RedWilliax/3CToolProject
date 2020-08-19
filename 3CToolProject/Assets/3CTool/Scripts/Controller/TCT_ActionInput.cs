@@ -13,13 +13,11 @@ public class TCT_ActionInput
 
     List<KeyCode> allKeyCodes = new List<KeyCode>();
 
-    EditorUtility editorUtility = new EditorUtility();
+    public EditorUtility editorUtility = new EditorUtility();
 
     public string Name { get; set; }
 
     public List<KeyCode> AllKeyCodes { get => allKeyCodes; set => allKeyCodes = value; }
-
-    public bool Show => editorUtility.show;
 
     public void AddKey(KeyCode _key)
     {
@@ -45,12 +43,13 @@ public class TCT_ActionInput
         return allKeyCodes.Any(n => n == _key);
     }
 
+    public void Rename(string _name) => name = _name;
 
 }
 
 [Serializable]
 public class EditorUtility
 {
-   public bool show = false;
+    public bool show = false;
 
 }
