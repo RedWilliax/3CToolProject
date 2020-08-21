@@ -48,31 +48,31 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
     void DrawAllActionInput(bool _show)
     {
-        if (!_show || TCT_ControllerManager.AllActionInput.Count < 1) return;
+        if (!_show || TCT_ControllerManager.allActionInput.Count < 1) return;
 
-        for (int i = 0; i < TCT_ControllerManager.AllActionInput.Count; i++)
+        for (int i = 0; i < TCT_ControllerManager.allActionInput.Count; i++)
         {
-            bool _showInputs = TCT_ControllerManager.AllActionInput[i].editorUtility.show;
+            bool _showInputs = TCT_ControllerManager.allActionInput[i].editorUtility.show;
 
             GUILayout.BeginHorizontal();
 
             EditorGUILayout.Separator();
 
-            TCT_ControllerManager.AllActionInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, TCT_ControllerManager.AllActionInput[i].name);
+            TCT_ControllerManager.allActionInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, TCT_ControllerManager.allActionInput[i].name);
 
-            EditorLayout.Button("...", RenameActionInput, TCT_ControllerManager.AllActionInput[i]);
+            EditorLayout.Button("...", RenameActionInput, TCT_ControllerManager.allActionInput[i]);
 
-            EditorLayout.Button("+", AddKeyInAction, TCT_ControllerManager.AllActionInput[i], KeyCode.None);
+            EditorLayout.Button("+", AddKeyInAction, TCT_ControllerManager.allActionInput[i], KeyCode.None);
 
-            EditorLayout.Button("x", RemoveActionInput, TCT_ControllerManager.AllActionInput[i]);
+            EditorLayout.Button("x", RemoveActionInput, TCT_ControllerManager.allActionInput[i]);
 
             GUILayout.EndHorizontal();
 
             EditorLayout.Space();
 
-            if (TCT_ControllerManager.AllActionInput.Count < 1) return;
+            if (TCT_ControllerManager.allActionInput.Count < 1) return;
 
-            DrawKeysActionInput(_showInputs, TCT_ControllerManager.AllActionInput[i]);
+            DrawKeysActionInput(_showInputs, TCT_ControllerManager.allActionInput[i]);
 
             EditorLayout.Space();
         }
@@ -90,14 +90,14 @@ public class TCT_ControllerManagerWindow : EditorWindow
     }
     public void RemoveActionInput(TCT_ActionInput _action)
     {
-        TCT_ControllerManager.AllActionInput.Remove(_action);
+        TCT_ControllerManager.allActionInput.Remove(_action);
     }
 
     void RenameActionInput(TCT_ActionInput _action)
     {
 
-        
-      //  _action.Rename(_newName);
+        GetWindow<TCT_RenameWindow>(true, "Rename AcitonInput", true).Init(_action);
+        //  _action.Rename(_newName);
     }
 
     void DrawKeysActionInput(bool _show, TCT_ActionInput _action)
@@ -131,7 +131,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
     }
     void CreateActionInput()
     {
-        TCT_ControllerManager.AllActionInput.Add(new TCT_ActionInput());
+        TCT_ControllerManager.allActionInput.Add(new TCT_ActionInput());
     }
 
     #endregion
@@ -140,7 +140,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
     {
         if (!_show) return;
 
-        for (int i = 0; i < TCT_ControllerManager.AllAxisInput.Count; i++)
+        for (int i = 0; i < TCT_ControllerManager.allAxisInput.Count; i++)
         {
 
         }
@@ -148,8 +148,58 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
     void CreateAxisInput()
     {
-        TCT_ControllerManager.AllAxisInput.Add(new TCT_AxisInput());
+        TCT_ControllerManager.allAxisInput.Add(new TCT_AxisInput());
     }
+
+
+}
+
+
+public class TCT_RenameWindow : EditorWindow
+{
+    ISmartNaming currentSmartName;
+
+    string currentName;
+
+    private void OnEnable()
+    {
+        maxSize = new Vector2(300, 100);
+        minSize = new Vector2(300, 100);
+
+    }
+
+    private void OnGUI()
+    {
+        currentName = EditorGUILayout.TextField(currentName);
+
+        EditorLayout.Space(2);
+
+        EditorGUILayout.BeginHorizontal();
+
+        EditorLayout.Button("OK", ValidateChangeName, currentName);
+
+        EditorLayout.Button("Cancel", Close);
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    public void Init(ISmartNaming _name)
+    {
+        SetSmartNaming(_name);
+
+        currentName = _name.Name;
+
+    }
+
+    void ValidateChangeName(string _name)
+    {
+        ChangeName(_name);
+        Close();
+    }
+
+    void ChangeName(string _name) => currentSmartName.Name = _name;
+    public void SetSmartNaming(ISmartNaming _name) => currentSmartName = _name;
+
 
 
 }

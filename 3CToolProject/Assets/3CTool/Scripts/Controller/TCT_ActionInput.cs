@@ -5,17 +5,17 @@ using System;
 using System.Linq;
 
 [Serializable]
-public class TCT_ActionInput
+public class TCT_ActionInput : ISmartNaming
 {
     public static Action<bool> ActionInput = null;
 
     public string name = "Default_ActionName";
 
-    List<KeyCode> allKeyCodes = new List<KeyCode>();
+    [SerializeField] List<KeyCode> allKeyCodes = new List<KeyCode>();
 
     public EditorUtility editorUtility = new EditorUtility();
 
-    public string Name { get; set; }
+    public string Name { get => name; set => name = value; }
 
     public List<KeyCode> AllKeyCodes { get => allKeyCodes; set => allKeyCodes = value; }
 
