@@ -16,6 +16,12 @@ public abstract class TCT_SmartCamBehaviour : MonoBehaviour
         ownOption = _ownSmartCam.SmartCamOption;
     }
 
+    protected virtual void Update()
+    {
+        
+    }
+
+
     protected virtual void FollowTarget()
     {
         float _x = (1 - ownOption.Lerp) * ownOption.Target.Transform.position.x + ownOption.Lerp * transform.position.x;

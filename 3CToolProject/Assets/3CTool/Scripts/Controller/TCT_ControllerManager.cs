@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Bindings;
 using System.Linq;
 using System;
 using Unitility;
@@ -38,6 +39,8 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
             }
         }
         );
+
+        Debug.Log(Input.mousePosition);
 
     }
 

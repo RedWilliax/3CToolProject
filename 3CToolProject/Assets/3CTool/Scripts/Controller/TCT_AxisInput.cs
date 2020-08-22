@@ -4,15 +4,6 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public enum AxisCode
-{
-    MouseX,
-    MouseY,
-    JoytickLeft,
-    JoystickRight
-
-}
-
 [Serializable]
 public class TCT_AxisInput : ISmartNaming
 {

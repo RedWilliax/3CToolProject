@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TCT_SmartCamFPS : TCT_SmartCamBehaviour
 {
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
+        if (ownOption.Target == null) return;
 
         FollowTarget();
 
         RotateSmartCam();
-
     }
 
     protected override void RotateSmartCam()
