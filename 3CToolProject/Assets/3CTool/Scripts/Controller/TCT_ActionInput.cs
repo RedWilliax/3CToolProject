@@ -7,7 +7,7 @@ using System.Linq;
 [Serializable]
 public class TCT_ActionInput : ISmartNaming
 {
-    public static Action<bool> ActionInput = null;
+    public Action<bool> ActionInput = null;
 
     public string name = "Default_ActionName";
 
