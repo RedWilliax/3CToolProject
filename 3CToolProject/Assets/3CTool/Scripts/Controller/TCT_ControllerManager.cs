@@ -33,14 +33,23 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         {
             for (int i = 0; i < n.AllKeyCodes.Count; i++)
             {
-                Debug.Log(n.AllKeyCodes.Count);
-
                 n.ActionInput.Invoke(Input.GetKey(n.AllKeyCodes[i]));
             }
         }
         );
 
-        Debug.Log(Input.mousePosition);
+
+        allAxisInput.ForEach(n =>
+        {
+
+            for (int i = 0; i < n.AllAxisCode.Count; i++)
+            {
+
+                n.AxisInput.Invoke(TCT_AxisRecuperator.GetAxis(n.AllAxisCode[i]));
+
+            }
+
+        });
 
     }
 
