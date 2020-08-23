@@ -1,14 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
-
 using Unitility;
+using JsonCom;
+
+public struct SaveControllerManager
+{
+    public List<TCT_ActionInput> allActionInput;
+    public List<TCT_AxisInput> allAxisInput;
+
+    public SaveControllerManager(List<TCT_ActionInput> allActionInput, List<TCT_AxisInput> allAxisInput)
+    {
+        this.allActionInput = allActionInput;
+        this.allAxisInput = allAxisInput;
+    }
+}
+
 
 public class TCT_ControllerManagerWindow : EditorWindow
 {
+    List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
+
+    List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
+
 
     bool showActionInput = false;
 
@@ -42,41 +60,45 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
         GUILayout.EndScrollView();
 
+        EditorLayout.Space();
+
+        RefreshData();
+
     }
 
     #region ActionInput
     void CreateActionInput()
     {
-        TCT_ControllerManager.allActionInput.Add(new TCT_ActionInput());
+        allActionInput.Add(new TCT_ActionInput());
     }
 
     void DrawAllActionInput(bool _show)
     {
-        if (!_show || TCT_ControllerManager.allActionInput.Count < 1) return;
+        if (!_show || allActionInput.Count < 1) return;
 
-        for (int i = 0; i < TCT_ControllerManager.allActionInput.Count; i++)
+        for (int i = 0; i < allActionInput.Count; i++)
         {
-            bool _showInputs = TCT_ControllerManager.allActionInput[i].editorUtility.show;
+            bool _showInputs = allActionInput[i].editorUtility.show;
 
             GUILayout.BeginHorizontal();
 
             EditorGUILayout.Separator();
 
-            TCT_ControllerManager.allActionInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, TCT_ControllerManager.allActionInput[i].name);
+            allActionInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, allActionInput[i].name);
 
-            EditorLayout.Button("...", RenameActionInput, TCT_ControllerManager.allActionInput[i]);
+            EditorLayout.Button("...", RenameActionInput, allActionInput[i]);
 
-            EditorLayout.Button("+", AddKeyInAction, TCT_ControllerManager.allActionInput[i], KeyCode.None);
+            EditorLayout.Button("+", AddKeyInAction, allActionInput[i], KeyCode.None);
 
-            EditorLayout.Button("x", RemoveActionInput, TCT_ControllerManager.allActionInput[i]);
+            EditorLayout.Button("x", RemoveActionInput, allActionInput[i]);
 
             GUILayout.EndHorizontal();
 
             EditorLayout.Space();
 
-            if (TCT_ControllerManager.allActionInput.Count < 1) return;
+            if (allActionInput.Count < 1) return;
 
-            DrawKeysActionInput(_showInputs, TCT_ControllerManager.allActionInput[i]);
+            DrawKeysActionInput(_showInputs, allActionInput[i]);
 
             EditorLayout.Space();
         }
@@ -94,13 +116,11 @@ public class TCT_ControllerManagerWindow : EditorWindow
     }
     public void RemoveActionInput(TCT_ActionInput _action)
     {
-        TCT_ControllerManager.allActionInput.Remove(_action);
+        allActionInput.Remove(_action);
     }
     void RenameActionInput(TCT_ActionInput _action)
     {
-
         GetWindow<TCT_RenameWindow>(true, "Rename AcitonInput", true).Init(_action);
-        //  _action.Rename(_newName);
     }
 
     void DrawKeysActionInput(bool _show, TCT_ActionInput _action)
@@ -124,7 +144,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
             else
                 _action.AllKeyCodes[i] = (KeyCode)_currentKeyCode;
 
-            EditorLayout.Button("x", _action.RemoveKey, (KeyCode)_currentKeyCode);
+            EditorLayout.Button("x", RemoveKeyCode, _action, (KeyCode)_currentKeyCode);
 
             EditorGUILayout.EndHorizontal();
 
@@ -133,41 +153,46 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
     }
 
+    void RemoveKeyCode(TCT_ActionInput _action, KeyCode _key)
+    {
+        _action.RemoveKey(_key);
+    }
+
     #endregion
 
     #region AxisInput
     void CreateAxisInput()
     {
-        TCT_ControllerManager.allAxisInput.Add(new TCT_AxisInput());
+        allAxisInput.Add(new TCT_AxisInput());
     }
 
     void DrawAllAxisInput(bool _show)
     {
-        if (!_show || TCT_ControllerManager.allAxisInput.Count < 1) return;
+        if (!_show || allAxisInput.Count < 1) return;
 
-        for (int i = 0; i < TCT_ControllerManager.allAxisInput.Count; i++)
+        for (int i = 0; i < allAxisInput.Count; i++)
         {
-            bool _showInputs = TCT_ControllerManager.allAxisInput[i].editorUtility.show;
+            bool _showInputs = allAxisInput[i].editorUtility.show;
 
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.Separator();
 
-            TCT_ControllerManager.allAxisInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, TCT_ControllerManager.allAxisInput[i].Name);
+            allAxisInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, allAxisInput[i].Name);
 
-            EditorLayout.Button("...", RenameAxisInput, TCT_ControllerManager.allAxisInput[i]);
+            EditorLayout.Button("...", RenameAxisInput, allAxisInput[i]);
 
-            EditorLayout.Button("+", AddAxisInAxisInput, TCT_ControllerManager.allAxisInput[i], AxisCode.None);
+            EditorLayout.Button("+", AddAxisInAxisInput, allAxisInput[i], AxisCode.None);
 
-            EditorLayout.Button("x", RemoveAxisInput, TCT_ControllerManager.allAxisInput[i]);
+            EditorLayout.Button("x", RemoveAxisInput, allAxisInput[i]);
 
             EditorGUILayout.EndHorizontal();
 
             EditorLayout.Space();
 
-            if (TCT_ControllerManager.allAxisInput.Count < 1) return;
+            if (allAxisInput.Count < 1) return;
 
-            DrawAxisInput(_showInputs, TCT_ControllerManager.allAxisInput[i]);
+            DrawAxisInput(_showInputs, allAxisInput[i]);
 
             EditorLayout.Space();
 
@@ -186,7 +211,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
     }
     public void RemoveAxisInput(TCT_AxisInput _axis)
     {
-        TCT_ControllerManager.allAxisInput.Remove(_axis);
+        allAxisInput.Remove(_axis);
     }
     void RenameAxisInput(TCT_AxisInput _axis)
     {
@@ -214,16 +239,33 @@ public class TCT_ControllerManagerWindow : EditorWindow
             else
                 _axis.AllAxisCode[i] = (AxisCode)_currentKeyCode;
 
-            EditorLayout.Button("x", _axis.RemoveKey, (AxisCode)_currentKeyCode);
+            EditorLayout.Button("x", RemoveAxisCode, _axis, (AxisCode)_currentKeyCode);
 
             EditorGUILayout.EndHorizontal();
 
             EditorLayout.Space();
         }
+    }
 
+    void RemoveAxisCode(TCT_AxisInput _axis, AxisCode _code)
+    {
+        _axis.RemoveKey(_code);
     }
 
     #endregion
+
+    void RefreshData()
+    {
+        SaveControllerManager _current = new SaveControllerManager(allActionInput, allAxisInput);
+
+        string directoyPath = Path.Combine(Application.dataPath, "Resources/SaveControllerManager");
+
+        string filePath = Path.Combine(directoyPath, "SaveControlleManage.txt");
+
+        JsonUnitility.WriteOnJson(filePath, directoyPath, _current);
+    }
+
+
 
 }
 

@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Bindings;
 using System.Linq;
 using System;
 using Unitility;
 
 public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 {
-    public static List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
+    [SerializeField] List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
 
-    public static List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
+    [SerializeField] List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
 
     #region ManageInput
     public int CountActionInput => allActionInput.Count;
@@ -38,17 +37,12 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         }
         );
 
-
         allAxisInput.ForEach(n =>
         {
-
             for (int i = 0; i < n.AllAxisCode.Count; i++)
             {
-
                 n.AxisInput.Invoke(TCT_AxisRecuperator.GetAxis(n.AllAxisCode[i]));
-
             }
-
         });
 
     }
@@ -63,7 +57,15 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         return allAxisInput.FirstOrDefault(n => n.Name == _nameAxis).AxisInput;
     }
 
+    public void SetListActionInput(List<TCT_ActionInput> _action)
+    {
+        allActionInput = _action;
+    }
 
+    public void SetListAxisInput(List<TCT_AxisInput> _axis)
+    {
+        allAxisInput = _axis;
+    }
 
 
 }

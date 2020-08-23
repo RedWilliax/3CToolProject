@@ -1,0 +1,1 @@
+{"allActionInput":[{"name":"fff","allKeyCodes":[269],"editorUtility":{"show":true}}],"allAxisInput":[{"name":"qzd","sensibilty":1.0,"deadZone":0.0,"allAxisCode":[0],"editorUtility":{"show":true}}]}
