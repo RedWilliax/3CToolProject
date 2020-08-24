@@ -101,7 +101,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
             return;
         }
 
-        currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Name).ToArray());
+        currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Transform.gameObject.name).ToArray());
 
         Reflection.SetField(smartCamOption, "target", allCharacter[currentIDTarget]);
     }

@@ -3,28 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.IO;
 using Unitility;
+using JsonCom;
+public struct SaveControllerManager
+{
+    public List<TCT_ActionInput> allActionInput;
+    public List<TCT_AxisInput> allAxisInput;
 
+    public SaveControllerManager(List<TCT_ActionInput> allActionInput, List<TCT_AxisInput> allAxisInput)
+    {
+        this.allActionInput = allActionInput;
+        this.allAxisInput = allAxisInput;
+    }
+}
 public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 {
     [SerializeField] List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
 
     [SerializeField] List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
 
-    #region ManageInput
-    public int CountActionInput => allActionInput.Count;
+    public override void Awake()
+    {
+        base.Awake();
 
-    public int CountAxisInput => allAxisInput.Count;
+        SaveControllerManager _getSave = new SaveControllerManager();
 
-    public TCT_ActionInput GetActionInput(int _index) => allActionInput[_index];
-    public TCT_AxisInput GetAxisInput(int _index) => allAxisInput[_index];
+        JsonUnitility.ReadJson(ref _getSave, TCT_PathForSave.filePath, TCT_PathForSave.directoyPath);
 
-    public void RemoveActionInput(TCT_ActionInput _action) => allActionInput.Remove(_action);
-    public void RemoveAxisInput(TCT_AxisInput _action) => allAxisInput.Remove(_action);
+        allActionInput = _getSave.allActionInput;
 
-    public void AddActionInput(TCT_ActionInput _action) => allActionInput.Add(_action);
-    public void AddAxisInput(TCT_AxisInput _action) => allAxisInput.Add(_action);
-    #endregion
+        allAxisInput = _getSave.allAxisInput;
+      
+    }
 
     private void Update()
     {
@@ -47,6 +58,21 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 
     }
 
+    #region ManageInput
+    public int CountActionInput => allActionInput.Count;
+
+    public int CountAxisInput => allAxisInput.Count;
+
+    public TCT_ActionInput GetActionInput(int _index) => allActionInput[_index];
+    public TCT_AxisInput GetAxisInput(int _index) => allAxisInput[_index];
+
+    public void RemoveActionInput(TCT_ActionInput _action) => allActionInput.Remove(_action);
+    public void RemoveAxisInput(TCT_AxisInput _action) => allAxisInput.Remove(_action);
+
+    public void AddActionInput(TCT_ActionInput _action) => allActionInput.Add(_action);
+    public void AddAxisInput(TCT_AxisInput _action) => allAxisInput.Add(_action);
+    #endregion
+
     public Action<bool> GetActionInput(string _nameAction)
     {
         return allActionInput.FirstOrDefault(n => n.Name == _nameAction).ActionInput;
@@ -67,5 +93,11 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         allAxisInput = _axis;
     }
 
+}
 
+public static class TCT_PathForSave
+{
+    public static string directoyPath = Path.Combine(Application.dataPath, "Resources/SaveControllerManager");
+
+    public static string filePath = Path.Combine(directoyPath, "SaveControlleManage.txt");
 }

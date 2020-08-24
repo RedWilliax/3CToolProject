@@ -8,25 +8,11 @@ using UnityEditor;
 using Unitility;
 using JsonCom;
 
-public struct SaveControllerManager
-{
-    public List<TCT_ActionInput> allActionInput;
-    public List<TCT_AxisInput> allAxisInput;
-
-    public SaveControllerManager(List<TCT_ActionInput> allActionInput, List<TCT_AxisInput> allAxisInput)
-    {
-        this.allActionInput = allActionInput;
-        this.allAxisInput = allAxisInput;
-    }
-}
-
-
 public class TCT_ControllerManagerWindow : EditorWindow
 {
     List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
 
     List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
-
 
     bool showActionInput = false;
 
@@ -45,6 +31,8 @@ public class TCT_ControllerManagerWindow : EditorWindow
         EditorLayout.Button("Add ActionInput", CreateActionInput);
 
         EditorLayout.Button("Add AxisInput", CreateAxisInput);
+
+        EditorLayout.Button("Save Change", SaveChange);
 
         GUILayout.EndHorizontal();
 
@@ -86,7 +74,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
             allActionInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, allActionInput[i].name);
 
-            EditorLayout.Button("...", RenameActionInput, allActionInput[i]);
+            EditorLayout.Button("...", RenameInput, allActionInput[i]);
 
             EditorLayout.Button("+", AddKeyInAction, allActionInput[i], KeyCode.None);
 
@@ -96,7 +84,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
             EditorLayout.Space();
 
-            if (allActionInput.Count < 1) return;
+            if (allActionInput.Count <= i) return;
 
             DrawKeysActionInput(_showInputs, allActionInput[i]);
 
@@ -117,10 +105,6 @@ public class TCT_ControllerManagerWindow : EditorWindow
     public void RemoveActionInput(TCT_ActionInput _action)
     {
         allActionInput.Remove(_action);
-    }
-    void RenameActionInput(TCT_ActionInput _action)
-    {
-        GetWindow<TCT_RenameWindow>(true, "Rename AcitonInput", true).Init(_action);
     }
 
     void DrawKeysActionInput(bool _show, TCT_ActionInput _action)
@@ -180,7 +164,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
             allAxisInput[i].editorUtility.show = EditorGUILayout.Foldout(_showInputs, allAxisInput[i].Name);
 
-            EditorLayout.Button("...", RenameAxisInput, allAxisInput[i]);
+            EditorLayout.Button("...", RenameInput, allAxisInput[i]);
 
             EditorLayout.Button("+", AddAxisInAxisInput, allAxisInput[i], AxisCode.None);
 
@@ -190,7 +174,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
             EditorLayout.Space();
 
-            if (allAxisInput.Count < 1) return;
+            if (allAxisInput.Count <= i) return;
 
             DrawAxisInput(_showInputs, allAxisInput[i]);
 
@@ -213,10 +197,6 @@ public class TCT_ControllerManagerWindow : EditorWindow
     {
         allAxisInput.Remove(_axis);
     }
-    void RenameAxisInput(TCT_AxisInput _axis)
-    {
-        GetWindow<TCT_RenameWindow>(true, "Rename AxisInput", true).Init(_axis);
-    }
 
     void DrawAxisInput(bool _show, TCT_AxisInput _axis)
     {
@@ -232,12 +212,21 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
             EditorGUILayout.Separator();
 
-            EditorLayout.EnumPopup(ref _currentKeyCode, "");
+            _currentKeyCode = EditorGUILayout.EnumPopup(_currentKeyCode, GUILayout.MaxWidth(100));
 
             if (_axis.ExistKeyCode((AxisCode)_currentKeyCode) && (AxisCode)_currentKeyCode != _axis.AllAxisCode[i])
                 Debug.LogWarning("this Axis is already assign in this Action. Please select an other");
             else
                 _axis.AllAxisCode[i] = (AxisCode)_currentKeyCode;
+
+            GUILayout.Box("Sensibility", GUILayout.MaxWidth(80));
+
+            _axis.sensibilty = EditorGUILayout.FloatField(_axis.sensibilty, GUILayout.MaxWidth(50));
+
+            GUILayout.Box("DeadZone", GUILayout.MaxWidth(80));
+
+            _axis.deadZone = EditorGUILayout.FloatField(_axis.deadZone, GUILayout.MaxWidth(50));
+
 
             EditorLayout.Button("x", RemoveAxisCode, _axis, (AxisCode)_currentKeyCode);
 
@@ -254,18 +243,22 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
     #endregion
 
+    void RenameInput(ISmartNaming _name)
+    {
+        GetWindow<TCT_RenameWindow>(true, "Rename AxisInput", true).Init(_name);
+    }
+
     void RefreshData()
     {
         SaveControllerManager _current = new SaveControllerManager(allActionInput, allAxisInput);
 
-        string directoyPath = Path.Combine(Application.dataPath, "Resources/SaveControllerManager");
-
-        string filePath = Path.Combine(directoyPath, "SaveControlleManage.txt");
-
-        JsonUnitility.WriteOnJson(filePath, directoyPath, _current);
+        JsonUnitility.WriteOnJson(TCT_PathForSave.filePath, TCT_PathForSave.directoyPath, _current);
     }
 
-
+    void SaveChange()
+    {
+        AssetDatabase.Refresh();
+    }
 
 }
 
