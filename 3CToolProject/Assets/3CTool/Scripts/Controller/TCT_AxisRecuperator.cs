@@ -13,7 +13,7 @@ public static class TCT_AxisRecuperator
 {
     static Vector2 mousePosition = Vector2.zero;
 
-    static float reduceFactor = 0.1f;
+    static float reduceFactor = 1;
 
     public static float GetAxis(AxisCode _axisCode, float _sensibility = 1, float _deadZone = 0)
     {
@@ -44,7 +44,7 @@ public static class TCT_AxisRecuperator
 
         mousePosition = Input.mousePosition;
 
-        return _currentX * _sensibility;
+        return _currentX * _sensibility * reduceFactor;
     }
 
     static float MouseY(float _sensibility = 1, float _deadZone = 0)
@@ -61,7 +61,7 @@ public static class TCT_AxisRecuperator
 
         mousePosition = Input.mousePosition;
 
-        return _currentY * _sensibility;
+        return _currentY * _sensibility * reduceFactor;
     }
 
 

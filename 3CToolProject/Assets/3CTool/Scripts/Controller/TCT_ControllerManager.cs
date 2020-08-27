@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using Unitility;
 using JsonCom;
+
 public struct SaveControllerManager
 {
     public List<TCT_ActionInput> allActionInput;
@@ -27,14 +28,7 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
     {
         base.Awake();
 
-        SaveControllerManager _getSave = new SaveControllerManager();
-
-        JsonUnitility.ReadJson(ref _getSave, TCT_PathForSave.filePath, TCT_PathForSave.directoyPath);
-
-        allActionInput = _getSave.allActionInput;
-
-        allAxisInput = _getSave.allAxisInput;
-      
+        Init();
     }
 
     private void Update()
@@ -43,7 +37,7 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         {
             for (int i = 0; i < n.AllKeyCodes.Count; i++)
             {
-                n.ActionInput.Invoke(Input.GetKey(n.AllKeyCodes[i]));
+                n.ActionInput?.Invoke(Input.GetKey(n.AllKeyCodes[i]));
             }
         }
         );
@@ -52,7 +46,7 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
         {
             for (int i = 0; i < n.AllAxisCode.Count; i++)
             {
-                n.AxisInput.Invoke(TCT_AxisRecuperator.GetAxis(n.AllAxisCode[i]));
+                n.AxisInput?.Invoke(TCT_AxisRecuperator.GetAxis(n.AllAxisCode[i]));
             }
         });
 
@@ -73,14 +67,14 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
     public void AddAxisInput(TCT_AxisInput _action) => allAxisInput.Add(_action);
     #endregion
 
-    public Action<bool> GetActionInput(string _nameAction)
+    public TCT_ActionInput GetActionInput(string _nameAction)
     {
-        return allActionInput.FirstOrDefault(n => n.Name == _nameAction).ActionInput;
+        return allActionInput.Find(n => n.Name == _nameAction);
     }
 
-    public Action<float> GetAxisInput(string _nameAxis)
+    public TCT_AxisInput GetAxisInput(string _nameAxis)
     {
-        return allAxisInput.FirstOrDefault(n => n.Name == _nameAxis).AxisInput;
+        return allAxisInput.Find(n => n.Name == _nameAxis);
     }
 
     public void SetListActionInput(List<TCT_ActionInput> _action)
@@ -91,6 +85,31 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
     public void SetListAxisInput(List<TCT_AxisInput> _axis)
     {
         allAxisInput = _axis;
+    }
+
+    void Init()
+    {
+        SaveControllerManager _getSave = new SaveControllerManager();
+
+        JsonUnitility.ReadJson(ref _getSave, TCT_PathForSave.filePath, TCT_PathForSave.directoyPath);
+
+        allActionInput = _getSave.allActionInput;
+
+        allAxisInput = _getSave.allAxisInput;
+    }
+
+    public void SubAtActionInput(string _nameActionInput, Action<bool> _methodeToSub)
+    {
+        TCT_ActionInput _currentAction = GetActionInput(_nameActionInput);
+
+        _currentAction.ActionInput += _methodeToSub;
+    }
+
+    public void SubAtAxisInput(string _nameAxis, Action<float> _methodeToSub)
+    {
+        TCT_AxisInput _currentAxis = GetAxisInput(_nameAxis);
+
+        _currentAxis.AxisInput += _methodeToSub;
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TCT_SmartCamTPS : TCT_SmartCamBehaviour
 {
 
-    private void Update()
+    protected override void Update()
     {
 
         FollowTarget();

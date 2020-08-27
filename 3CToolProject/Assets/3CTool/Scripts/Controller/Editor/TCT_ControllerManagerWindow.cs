@@ -19,6 +19,16 @@ public class TCT_ControllerManagerWindow : EditorWindow
     bool showAxisInput = false;
 
     Vector2 scroll = new Vector2();
+    private void OnEnable()
+    {
+        SaveControllerManager _getSave = new SaveControllerManager();
+
+        JsonUnitility.ReadJson(ref _getSave, TCT_PathForSave.filePath, TCT_PathForSave.directoyPath);
+
+        allActionInput = _getSave.allActionInput;
+
+        allAxisInput = _getSave.allAxisInput;
+    }
 
     private void OnGUI()
     {
@@ -49,9 +59,6 @@ public class TCT_ControllerManagerWindow : EditorWindow
         GUILayout.EndScrollView();
 
         EditorLayout.Space();
-
-        RefreshData();
-
     }
 
     #region ActionInput
@@ -257,6 +264,7 @@ public class TCT_ControllerManagerWindow : EditorWindow
 
     void SaveChange()
     {
+        RefreshData();
         AssetDatabase.Refresh();
     }
 
