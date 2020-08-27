@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
-using Unitility;
+using Unitility.Editor;
 using JsonCom;
 
 public class TCT_ControllerManagerWindow : EditorWindow

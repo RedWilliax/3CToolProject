@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using ReflectionLib;
-using Unitility;
+using Unitility.Editor;
 
 [CustomEditor(typeof(TCT_Character))]
 public class TCT_CharacterEditor : EditorCustom<TCT_Character>

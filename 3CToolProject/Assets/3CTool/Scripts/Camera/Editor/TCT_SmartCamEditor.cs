@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 using ReflectionLib;
-using Unitility;
+using Unitility.Editor;
 
 [CustomEditor(typeof(TCT_SmartCam))]
 public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
