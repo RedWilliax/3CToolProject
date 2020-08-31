@@ -80,6 +80,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
                 behaviour.Init(this);
                 break;
             case TypeSmartCam.TPS:
+                behaviour = gameObject.AddComponent<TCT_SmartCamTPS>();
+                behaviour.Init(this);
                 break;
 
             case TypeSmartCam.NONE:
@@ -120,6 +122,8 @@ public class SmartCamOption
 
     [SerializeField] ITargetSC target = null;
 
+    [SerializeField] float sensibility = 1;
+
     public float X
     {
         get => x;
@@ -129,7 +133,6 @@ public class SmartCamOption
             x = fixeCam ? x : value;
         }
     }
-
     public float Y
     {
         get => y;
@@ -139,7 +142,6 @@ public class SmartCamOption
             y = fixeCam ? y : value;
         }
     }
-
     public float Z
     {
         get => z;
@@ -149,7 +151,6 @@ public class SmartCamOption
             z = fixeCam ? z : value;
         }
     }
-
     public bool FixeCam
     {
         get => fixeCam;
@@ -160,7 +161,6 @@ public class SmartCamOption
             fixeCam = value;
         }
     }
-
     public ITargetSC Target
     {
         get => target;
@@ -170,7 +170,6 @@ public class SmartCamOption
             target = value;
         }
     }
-
     public float Lerp
     {
         get => lerp;
@@ -180,9 +179,8 @@ public class SmartCamOption
             lerp = value > 1 ? lerp : value;
         }
     }
-
     public Vector3 OffsetSmartCam => new Vector3(x, y, z);
-
+    public float Sensibility { get => sensibility; set => sensibility = value; }
     public void SetTarget(ITargetSC _target) => Target = target;
 
 

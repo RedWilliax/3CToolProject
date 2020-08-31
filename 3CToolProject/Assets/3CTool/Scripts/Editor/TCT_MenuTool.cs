@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using UnityEditor;
 
@@ -13,7 +14,7 @@ public static class TCT_MenuTool
     {
         VerifyAndAddOnLogic<TCT_SmartCamManager>();
 
-        GameObject _go = new GameObject($"SmartCam", (typeof(TCT_SmartCam)));
+        GameObject _go = new GameObject($"SmartCam", new Type[]{ typeof(Camera), typeof(TCT_SmartCam) });
 
         Selection.activeObject = _go;
     }

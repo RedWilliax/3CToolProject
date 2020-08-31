@@ -51,7 +51,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
     public override void OnInspectorGUI()
     {
         UtilityEditor.VersioningTool("TCT", 0, 1, 0, 0);
-        
+
         EditorLayout.Space(2);
 
         EditorReflectionLayout.TextField(eTarget, "name", "SmartCam's Name");
@@ -78,6 +78,10 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         EditorReflectionLayout.Slider(smartCamOption, "lerp", "Lerp", 0f, 1f);
 
+        EditorLayout.Space();
+
+        SetSensibilitySmartCam();
+
         EditorLayout.Space(2);
 
         UpdateReflection(ref smartCamOption);
@@ -95,7 +99,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void SetTargetSmartCam()
     {
-        if (allCharacter.Count < 1) 
+        if (allCharacter.Count < 1)
         {
             EditorGUILayout.LabelField("No target found");
             return;
@@ -104,6 +108,11 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Transform.gameObject.name).ToArray());
 
         Reflection.SetField(smartCamOption, "target", allCharacter[currentIDTarget]);
+    }
+
+    void SetSensibilitySmartCam()
+    {
+        EditorReflectionLayout.Slider(smartCamOption, "sensibility", "Sensibility", 0f, 2f);
     }
 
 }

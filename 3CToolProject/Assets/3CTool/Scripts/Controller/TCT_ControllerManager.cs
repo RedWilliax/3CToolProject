@@ -20,9 +20,9 @@ public struct SaveControllerManager
 }
 public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 {
-    [SerializeField] List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
+    List<TCT_ActionInput> allActionInput = new List<TCT_ActionInput>();
 
-    [SerializeField] List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
+    List<TCT_AxisInput> allAxisInput = new List<TCT_AxisInput>();
 
     public override void Awake()
     {
@@ -65,6 +65,9 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 
     public void AddActionInput(TCT_ActionInput _action) => allActionInput.Add(_action);
     public void AddAxisInput(TCT_AxisInput _action) => allAxisInput.Add(_action);
+
+    public bool ExistActionInput(string _action) => allActionInput.Any(n => n.Name == _action);
+    public bool ExistAxisInput(string _action) => allAxisInput.Any(n => n.Name == _action);
     #endregion
 
     public TCT_ActionInput GetActionInput(string _nameAction)
@@ -100,6 +103,12 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 
     public void SubAtActionInput(string _nameActionInput, Action<bool> _methodeToSub)
     {
+        if (!ExistActionInput(_nameActionInput))
+        {
+            Debug.LogError($"No one ActionInput is named by {_nameActionInput}");
+            return;
+        }
+
         TCT_ActionInput _currentAction = GetActionInput(_nameActionInput);
 
         _currentAction.ActionInput += _methodeToSub;
@@ -107,6 +116,12 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
 
     public void SubAtAxisInput(string _nameAxis, Action<float> _methodeToSub)
     {
+        if (!ExistAxisInput(_nameAxis))
+        {
+            Debug.LogError($"No one AxisInput is named by {_nameAxis}");
+            return;
+        }
+
         TCT_AxisInput _currentAxis = GetAxisInput(_nameAxis);
 
         _currentAxis.AxisInput += _methodeToSub;

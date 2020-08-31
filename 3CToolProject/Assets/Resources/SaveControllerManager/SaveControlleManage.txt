@@ -1,1 +1,1 @@
-{"allActionInput":[],"allAxisInput":[]}
+{"allActionInput":[{"name":"OK","allKeyCodes":[],"editorUtility":{"show":false}},{"name":"Default_ActionName","allKeyCodes":[],"editorUtility":{"show":false}}],"allAxisInput":[{"name":"qzdqdz","sensibilty":1.0,"deadZone":0.0,"allAxisCode":[],"editorUtility":{"show":false}},{"name":"Default_AxisName","sensibilty":1.0,"deadZone":0.0,"allAxisCode":[],"editorUtility":{"show":false}}]}

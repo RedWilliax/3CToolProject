@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Unitility.Engine;
 
-public class TCT_Character : MonoBehaviour, IHandle, ITargetSC
+public class TCT_Character : MonoBehaviour, IHandle, ITargetSC, ISmartNaming
 {
     [SerializeField] new string name = "DefaultName";
 
@@ -56,8 +56,10 @@ public class TCT_Character : MonoBehaviour, IHandle, ITargetSC
 
     public void AddComponent(TCT_CharacterComponent _component)
     {
-        if (allComponents.Any(n => n.GetType() == _component.GetType()))
-            Debug.Log($"sameType {_component.GetType()}");
+        Debug.Log("This feature coming out soon ! Stay ");
+
+        //if (allComponents.Any(n => n.GetType() == _component.GetType()))
+        //    Debug.Log($"sameType {_component.GetType()}");
 
 
     }
