@@ -56,7 +56,7 @@ public class TCT_Character : MonoBehaviour, IHandle, ITargetSC, ISmartNaming
 
     public void AddComponent(TCT_CharacterComponent _component)
     {
-        Debug.Log("This feature coming out soon ! Stay ");
+        Debug.Log("This feature coming out soon ! Stay aware");
 
         //if (allComponents.Any(n => n.GetType() == _component.GetType()))
         //    Debug.Log($"sameType {_component.GetType()}");

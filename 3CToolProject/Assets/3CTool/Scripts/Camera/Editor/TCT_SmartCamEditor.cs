@@ -45,7 +45,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void UpdateReflection(ref SmartCamOption _smartCamOption)
     {
-        eTarget.SmartCamOption = _smartCamOption;
+        Reflection.SetField(eTarget, "smartCamOption", _smartCamOption);
     }
 
     public override void OnInspectorGUI()

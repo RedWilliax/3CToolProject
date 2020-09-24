@@ -89,6 +89,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
             default:
                 break;
         }
+
+        Debug.Log(SmartCamOption.Target.Name);
     }
 
     private void OnDrawGizmos()
@@ -120,7 +122,7 @@ public class SmartCamOption
 
     [SerializeField] float lerp = 0;
 
-    [SerializeField] ITargetSC target = null;
+    [SerializeField] ITargetSC target;
 
     [SerializeField] float sensibility = 1;
 
