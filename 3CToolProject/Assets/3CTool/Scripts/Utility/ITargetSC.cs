@@ -6,7 +6,4 @@ public interface ITargetSC
 {
     Transform Transform { get; }
 
-    string Name { get; }
-
-
 }

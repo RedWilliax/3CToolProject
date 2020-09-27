@@ -11,7 +11,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 {
     SmartCamOption smartCamOption;
 
-    List<ITargetSC> allCharacter;
+    List<ITargetSC> allTarget;
 
     int currentIDTarget = 0;
 
@@ -21,9 +21,12 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         SetReflection(out smartCamOption);
 
-        allCharacter = TCT_MenuTool.GetAllCharacters();
+        allTarget = TCT_MenuTool.GetAllTarget();
 
         SetIDTarget();
+
+        Debug.Log(smartCamOption.Target);
+
     }
 
     void SetReflection(out SmartCamOption _smartCamOption)
@@ -33,13 +36,13 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void SetIDTarget()
     {
-        ITargetSC _currentTarget = Reflection.Field<ITargetSC>(smartCamOption, "target");
+        ITargetSC _currentTarget = smartCamOption.Target;
 
-        if (_currentTarget == null || allCharacter.Count < 1)
+        if (_currentTarget == null || allTarget.Count < 1)
             return;
 
-        for (int i = 0; i < allCharacter.Count; i++)
-            if (allCharacter[i].Name == _currentTarget.Name)
+        for (int i = 0; i < allTarget.Count; i++)
+            if (allTarget[i].Transform.name == _currentTarget.Transform.name)
                 currentIDTarget = i;
     }
 
@@ -99,15 +102,17 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     void SetTargetSmartCam()
     {
-        if (allCharacter.Count < 1)
+        if (allTarget.Count < 1)
         {
             EditorGUILayout.LabelField("No target found");
+            smartCamOption.Target = null;
             return;
         }
 
-        currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allCharacter.Select(n => n.Transform.gameObject.name).ToArray());
+        currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allTarget.Select(n => n.Transform.gameObject.name).ToArray());
 
-        Reflection.SetField(smartCamOption, "target", allCharacter[currentIDTarget]);
+        smartCamOption.Target = allTarget[currentIDTarget];
+
     }
 
     void SetSensibilitySmartCam()

@@ -79,6 +79,7 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
                 behaviour = gameObject.AddComponent<TCT_SmartCamFPS>();
                 behaviour.Init(this);
                 break;
+
             case TypeSmartCam.TPS:
                 behaviour = gameObject.AddComponent<TCT_SmartCamTPS>();
                 behaviour.Init(this);
@@ -89,8 +90,6 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
             default:
                 break;
         }
-
-        Debug.Log(SmartCamOption.Target.Name);
     }
 
     private void OnDrawGizmos()

@@ -24,7 +24,7 @@ public static class TCT_MenuTool
     {
         VerifyAndAddOnLogic<TCT_CharacterManager>();
 
-        GameObject _go = new GameObject($"Character [{GetAllCharacters().Count}]", typeof(TCT_Character));
+        GameObject _go = new GameObject($"Character [{GetAllTarget().Count}]", typeof(TCT_Character));
 
         _go.GetComponent<TCT_Character>().Name = _go.name;
 
@@ -82,7 +82,7 @@ public static class TCT_MenuTool
 
     #endregion
 
-    public static List<ITargetSC> GetAllCharacters() => GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITargetSC>().ToList();
+    public static List<ITargetSC> GetAllTarget() => GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITargetSC>().ToList();
 
 
 

@@ -4,13 +4,13 @@ using System.Linq;
 using UnityEngine;
 using Unitility.Engine;
 
-public class TCT_Character : MonoBehaviour, IHandle, ITargetSC, ISmartNaming
+public class TCT_Character : MonoBehaviour, IHandle, ISmartNaming, ITargetSC
 {
     [SerializeField] new string name = "DefaultName";
 
-    int id = 0;
-
     [SerializeField] List<TCT_CharacterComponent> allComponents = new List<TCT_CharacterComponent>();
+
+    int id = 0;
 
     public string Name { get => name; set => name = value; }
 
@@ -18,7 +18,6 @@ public class TCT_Character : MonoBehaviour, IHandle, ITargetSC, ISmartNaming
 
     public Transform Transform => transform;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(AddToHandler());
