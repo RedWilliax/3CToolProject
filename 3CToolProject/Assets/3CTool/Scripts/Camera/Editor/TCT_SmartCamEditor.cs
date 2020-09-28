@@ -24,9 +24,6 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         allTarget = TCT_MenuTool.GetAllTarget();
 
         SetIDTarget();
-
-        Debug.Log(smartCamOption.Target);
-
     }
 
     void SetReflection(out SmartCamOption _smartCamOption)
@@ -44,6 +41,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         for (int i = 0; i < allTarget.Count; i++)
             if (allTarget[i].Transform.name == _currentTarget.Transform.name)
                 currentIDTarget = i;
+
     }
 
     void UpdateReflection(ref SmartCamOption _smartCamOption)
@@ -110,6 +108,8 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         }
 
         currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allTarget.Select(n => n.Transform.gameObject.name).ToArray());
+
+        Debug.Log(currentIDTarget);
 
         smartCamOption.Target = allTarget[currentIDTarget];
 
