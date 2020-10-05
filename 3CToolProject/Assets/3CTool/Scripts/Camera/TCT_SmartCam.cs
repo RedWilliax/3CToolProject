@@ -24,6 +24,8 @@ public class TCT_SmartCam : MonoBehaviour, IHandle
 
     [SerializeField] TypeSmartCam typeSmartCam = TypeSmartCam.NONE;
 
+    public int currentIDTarget = 0;
+
     public int ID { get => id; set => id = value; }
 
     public string Name { get => name; set => name = value; }

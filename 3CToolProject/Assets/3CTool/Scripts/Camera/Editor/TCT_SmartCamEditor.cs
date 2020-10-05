@@ -13,8 +13,6 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
     List<ITargetSC> allTarget;
 
-    int currentIDTarget = 0;
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -40,7 +38,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         for (int i = 0; i < allTarget.Count; i++)
             if (allTarget[i].Transform.name == _currentTarget.Transform.name)
-                currentIDTarget = i;
+                eTarget.currentIDTarget = i;
 
     }
 
@@ -107,12 +105,9 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
             return;
         }
 
-        currentIDTarget = EditorGUILayout.Popup("Target", currentIDTarget, allTarget.Select(n => n.Transform.gameObject.name).ToArray());
+        eTarget.currentIDTarget = EditorGUILayout.Popup("Target", eTarget.currentIDTarget, allTarget.Select(n => n.Transform.gameObject.name).ToArray());
 
-        Debug.Log(currentIDTarget);
-
-        smartCamOption.Target = allTarget[currentIDTarget];
-
+        smartCamOption.Target = allTarget[eTarget.currentIDTarget];
     }
 
     void SetSensibilitySmartCam()
