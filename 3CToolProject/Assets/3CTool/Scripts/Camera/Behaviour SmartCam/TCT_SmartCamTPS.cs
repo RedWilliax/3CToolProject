@@ -27,11 +27,7 @@ public class TCT_SmartCamTPS : TCT_SmartCamBehaviour
 
         angle += TCT_AxisRecuperator.GetAxis(AxisCode.MouseX);
 
-        transform.position = new Vector3(Mathf.Cos(angle), 0 , Mathf.Sin(angle)) + ownOption.OffsetSmartCam;
-
-
-
-
+        transform.position = new Vector3(Mathf.Cos(angle), 0 , Mathf.Sin(angle)) + ownOption.OffsetSmartCam + ownOption.Target.Transform.position;
 
     }
 

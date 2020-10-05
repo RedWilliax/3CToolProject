@@ -36,7 +36,7 @@ public static class TCT_MenuTool
     {
         VerifyAndAddOnLogic<TCT_ControllerManager>();
 
-        EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager 0.1.0.0", true);
+       // EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager 0.1.0.0", true);
     }
 
     static bool Exist(string _objectToCheck)

@@ -184,8 +184,5 @@ public class SmartCamOption
     }
     public Vector3 OffsetSmartCam => new Vector3(x, y, z);
     public float Sensibility { get => sensibility; set => sensibility = value; }
-    public void SetTarget(ITargetSC _target) => Target = target;
-
-
 
 }
