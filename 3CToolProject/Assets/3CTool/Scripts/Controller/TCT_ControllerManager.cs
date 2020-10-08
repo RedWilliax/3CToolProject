@@ -49,7 +49,6 @@ public class TCT_ControllerManager : Singleton<TCT_ControllerManager>
                 n.AxisInput?.Invoke(TCT_AxisRecuperator.GetAxis(n.AllAxisCode[i]));
             }
         });
-
     }
 
     #region ManageInput

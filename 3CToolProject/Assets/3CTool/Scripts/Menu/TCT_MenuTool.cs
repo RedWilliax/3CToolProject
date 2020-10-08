@@ -31,13 +31,11 @@ public static class TCT_MenuTool
         Selection.activeObject = _go;
     }
 
-    [MenuItem("3CTool/Input/InputManager")]
-    static void InputManager()
-    {
-        VerifyAndAddOnLogic<TCT_ControllerManager>();
-
-       // EditorWindow.GetWindow<TCT_ControllerManagerWindow>(false, "Controller Manager 0.1.0.0", true);
-    }
+    //[MenuItem("3CTool/Input/InputManager")]
+    //static void InputManager()
+    //{
+    //    VerifyAndAddOnLogic<TCT_ControllerManager>();
+    //}
 
     static bool Exist(string _objectToCheck)
     {
@@ -46,7 +44,7 @@ public static class TCT_MenuTool
         return _ob != null;
     }
 
-    static void VerifyAndAddOnLogic<T>() where T : MonoBehaviour
+    public static void VerifyAndAddOnLogic<T>() where T : MonoBehaviour
     {
         VerifyLogic();
 
