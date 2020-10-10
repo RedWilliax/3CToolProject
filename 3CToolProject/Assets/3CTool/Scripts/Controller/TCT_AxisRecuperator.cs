@@ -11,7 +11,8 @@ public enum AxisCode
 
 public static class TCT_AxisRecuperator
 {
-    static Vector2 mousePosition = Vector2.zero;
+    static Vector2 mousePositionX = Vector2.zero;
+    static Vector2 mousePositionY = Vector2.zero;
 
     static float reduceFactor = 1;
 
@@ -32,34 +33,34 @@ public static class TCT_AxisRecuperator
 
     static float MouseX(float _sensibility = 1, float _deadZone = 0)
     {
-        if (mousePosition == Vector2.zero)
+        if (mousePositionX == Vector2.zero)
         {
-            mousePosition = Input.mousePosition;
+            mousePositionX = Input.mousePosition;
             return 0;
         }
 
-        float _currentX = Input.mousePosition.x - mousePosition.x;
+        float _currentX = Input.mousePosition.x - mousePositionX.x;
 
         if (Mathf.Abs(_currentX) < _deadZone) return 0;
 
-        mousePosition = Input.mousePosition;
+        mousePositionX = Input.mousePosition;
 
         return _currentX * _sensibility * reduceFactor;
     }
 
     static float MouseY(float _sensibility = 1, float _deadZone = 0)
     {
-        if (mousePosition == Vector2.zero)
+        if (mousePositionY == Vector2.zero)
         {
-            mousePosition = Input.mousePosition;
+            mousePositionY = Input.mousePosition;
             return 0;
         }
 
-        float _currentY = Input.mousePosition.y - mousePosition.y;
+        float _currentY = Input.mousePosition.y - mousePositionY.y;
 
         if (Mathf.Abs(_currentY) < _deadZone) return 0;
 
-        mousePosition = Input.mousePosition;
+        mousePositionY = Input.mousePosition;
 
         return _currentY * _sensibility * reduceFactor;
     }
