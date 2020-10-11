@@ -94,6 +94,7 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
         EditorReflectionLayout.Slider(smartCamOption, "x", "X", -100f, 100f);
         EditorReflectionLayout.Slider(smartCamOption, "y", "Y", -100f, 100f);
         EditorReflectionLayout.Slider(smartCamOption, "z", "Z", -100f, 100f);
+
     }
 
     void SetTargetSmartCam()

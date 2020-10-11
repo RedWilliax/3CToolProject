@@ -6,7 +6,8 @@ public class TCT_SmartCamTPS : TCT_SmartCamBehaviour
 {
     Vector3 GetVectorDirector => ownOption.Target.Transform.position - transform.position;
 
-    float angle = 0;
+    float angleHorizon = 0;
+    float angleVerti = 0;
 
     protected override void Update()
     {
@@ -17,32 +18,38 @@ public class TCT_SmartCamTPS : TCT_SmartCamBehaviour
 
         RotateAround(ownOption.Sensibility);
 
+        LookAt();
     }
 
     void RotateAround(float _sensibility)
     {
-        //trigo 
-        //transform.Rotate(Vector3.up + GetVectorDirector, TCT_AxisRecuperator.GetAxis(AxisCode.MouseX) * _sensibility);
-        //transform.Rotate(Vector3.right + GetVectorDirector, -TCT_AxisRecuperator.GetAxis(AxisCode.MouseY) * _sensibility);
 
-        angle += TCT_AxisRecuperator.GetAxis(AxisCode.MouseX);
+        float _distanceTemp = 5;
 
-        transform.position = new Vector3(Mathf.Cos(angle), 0 , Mathf.Sin(angle)) + ownOption.OffsetSmartCam + ownOption.Target.Transform.position;
+        angleHorizon += TCT_AxisRecuperator.GetAxis(AxisCode.MouseX) * _sensibility * 0.01f;
+
+        angleVerti += TCT_AxisRecuperator.GetAxis(AxisCode.MouseY) * _sensibility * 0.01f;
+
+        Vector3 _position = new Vector3(_distanceTemp + Mathf.Cos(angleHorizon), 0, Mathf.Sin(angleHorizon));
+
+
+        transform.position = _position + ownOption.OffsetSmartCam + ownOption.Target.Transform.position;
 
     }
 
     void LookAt()
     {
+        Vector3 _direction = ownOption.Target.Transform.position - ownSmartCam.transform.position;
 
+        Quaternion _lookAt = Quaternion.LookRotation(_direction, Vector3.up);
 
-
+        ownSmartCam.transform.rotation = Quaternion.RotateTowards(ownSmartCam.transform.rotation, _lookAt, 500);
     }
 
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(Vector2.zero, new Vector2(100, 200)), $" X : {TCT_AxisRecuperator.GetAxis(AxisCode.MouseX)} Y : {TCT_AxisRecuperator.GetAxis(AxisCode.MouseY)}" );
-
+        
     }
 
 
