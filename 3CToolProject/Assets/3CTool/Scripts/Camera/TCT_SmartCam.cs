@@ -127,6 +127,8 @@ public class SmartCamOption
 
     [SerializeField] float sensibility = 1;
 
+    [SerializeField] float radiusTPS = 0;
+
     public float X
     {
         get => x;
@@ -173,6 +175,7 @@ public class SmartCamOption
             target = value;
         }
     }
+    public Vector3 TargetPosition => Target != null ? Target.Transform.position : Vector3.zero;
     public float Lerp
     {
         get => lerp;
@@ -184,5 +187,6 @@ public class SmartCamOption
     }
     public Vector3 OffsetSmartCam => new Vector3(x, y, z);
     public float Sensibility { get => sensibility; set => sensibility = value; }
+    public float RadiusTPS { get => radiusTPS; set => radiusTPS = value; }
 
 }

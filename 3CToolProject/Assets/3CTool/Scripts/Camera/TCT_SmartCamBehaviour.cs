@@ -18,7 +18,7 @@ public abstract class TCT_SmartCamBehaviour : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+        if (ownOption == null || ownOption.Target == null) return;
     }
 
 

@@ -8,8 +8,6 @@ public class TCT_SmartCamFPS : TCT_SmartCamBehaviour
     {
         base.Update();
 
-        if (ownOption.Target == null) return;
-
         FollowTarget();
 
         RotateSmartCam();

@@ -81,6 +81,14 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         SetSensibilitySmartCam();
 
+        EditorLayout.Space();
+
+        if (Reflection.Field<TypeSmartCam>(eTarget, "typeSmartCam") == TypeSmartCam.TPS)
+            smartCamOption.RadiusTPS = EditorLayout.Slider(smartCamOption.RadiusTPS, "Radius", 1, 15);
+
+        else
+            smartCamOption.RadiusTPS = 0;
+
         EditorLayout.Space(2);
 
         UpdateReflection(ref smartCamOption);
