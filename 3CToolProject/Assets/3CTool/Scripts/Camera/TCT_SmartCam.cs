@@ -119,7 +119,9 @@ public class SmartCamOption
 
     [SerializeField] float z = 0;
 
-    [SerializeField] bool fixeCam = false;
+    [SerializeField] bool fixeRotationCam = false;
+
+    [SerializeField] bool fixeMovementCam = false;
 
     [SerializeField] float lerp = 0;
 
@@ -135,7 +137,7 @@ public class SmartCamOption
 
         set
         {
-            x = fixeCam ? x : value;
+            x = fixeRotationCam ? x : value;
         }
     }
     public float Y
@@ -144,7 +146,7 @@ public class SmartCamOption
 
         set
         {
-            y = fixeCam ? y : value;
+            y = fixeRotationCam ? y : value;
         }
     }
     public float Z
@@ -153,18 +155,23 @@ public class SmartCamOption
 
         set
         {
-            z = fixeCam ? z : value;
+            z = fixeRotationCam ? z : value;
         }
     }
-    public bool FixeCam
+    public bool FixeRotationCam
     {
-        get => fixeCam;
+        get => fixeRotationCam;
 
         set
         {
-            if (value == fixeCam) return;
-            fixeCam = value;
+            fixeRotationCam = value;
         }
+    }
+    public bool  FixeMovementCam
+    {
+        get => fixeMovementCam;
+
+        set => fixeMovementCam = value;
     }
     public ITargetSC Target
     {

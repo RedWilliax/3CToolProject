@@ -67,7 +67,11 @@ public class TCT_SmartCamEditor : EditorCustom<TCT_SmartCam>
 
         EditorLayout.Space();
 
-        EditorReflectionLayout.Toggle(smartCamOption, "fixeCam", "FixeCam");
+        EditorReflectionLayout.Toggle(smartCamOption, "fixeRotationCam", "Fixe Rotation Camera");
+
+        EditorLayout.Space();
+
+        EditorReflectionLayout.Toggle(smartCamOption, "fixeMovementCam", "Fixe Movement Camera");
 
         EditorLayout.Space();
 
