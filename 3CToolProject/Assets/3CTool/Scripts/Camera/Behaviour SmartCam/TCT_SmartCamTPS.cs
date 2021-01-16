@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TCT_SmartCamTPS : TCT_SmartCamBehaviour
 {
-    Vector3 GetVectorDirector => (ownOption.TargetPosition + ownOption.OffsetSmartCam)- transform.position;
+    Vector3 GetVectorDirector => (ownOption.TargetPosition + ownOption.OffsetSmartCam) - transform.position;
 
     float _angleHorizon = 0;
     float _angleVerti = 0;
